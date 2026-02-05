@@ -1,6 +1,6 @@
 ---
 name: openspec-guide
-description: OpenSpec usage guide and workflow reference. Triggers when users ask about OpenSpec, including: (1) how to use /opsx commands, (2) OpenSpec workflow explanations, (3) Spec-Driven Development (SDD) best practices, (4) purpose and format of proposal, specs, design, and tasks files, (5) delta specs concepts and usage.
+description: "OpenSpec usage guide and workflow reference. Triggers when users ask about OpenSpec, including: (1) how to use /opsx commands, (2) OpenSpec workflow explanations, (3) Spec-Driven Development (SDD) best practices, (4) purpose and format of proposal, specs, design, and tasks files, (5) delta specs concepts and usage."
 ---
 
 # OpenSpec User Guide

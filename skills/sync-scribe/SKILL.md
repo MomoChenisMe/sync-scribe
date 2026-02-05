@@ -1,6 +1,6 @@
 ---
 name: sync-scribe
-description: Simplified note-taking and todo management. Auto-categorizes input as either a todo (actionable task) or a note (informational). Supports CRUD. Use when user wants to: (1) Record a task, (2) Save an idea, (3) List/search/update/delete todos or notes, (4) Mark a todo complete. No reminders.
+description: "Simplified note-taking and todo management. Auto-categorizes input as either a todo (actionable task) or a note (informational). Supports CRUD. Use when user wants to: (1) Record a task, (2) Save an idea, (3) List/search/update/delete todos or notes, (4) Mark a todo complete. No reminders."
 ---
 
 # Sync Scribe
