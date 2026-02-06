@@ -4,18 +4,18 @@
 
 ## 技能總覽
 
-| 技能 | 說明 |
-|------|------|
-| **Sync Scribe** | 筆記與待辦事項管理 |
-| **MomoChenIsMe Writing Style** | 部落格寫作風格指南（繁體中文）|
-| **Skill Creator** | Claude Code 技能開發指南 |
-| **Plugin Creator** | Claude Code 插件開發指南 |
-| **Claude Code CLI Guide** | Claude Code CLI 完整使用參考 |
-| **Gemini CLI Guide** | Gemini CLI 完整使用參考 |
-| **OpenSpec Guide** | 規範驅動開發工作流程框架 |
-| **Coding Agent** | 透過背景程序執行程式碼代理（Codex/Claude Code/OpenCode/Pi）|
-| **GitHub** | 使用 `gh` CLI 與 GitHub 互動 |
-| **tmux** | 遠端控制 tmux 會話，處理互動式 CLI 工作流程 |
+| 技能 | 說明 | 備註 |
+|------|------|------|
+| **Sync Scribe** | 筆記與待辦事項管理 | |
+| **MomoChenIsMe Writing Style** | 部落格寫作風格指南（繁體中文）| |
+| **Skill Creator** | Claude Code 技能開發指南 | |
+| **Plugin Creator** | Claude Code 插件開發指南 | |
+| **Claude Code CLI Guide** | Claude Code CLI 完整使用參考 | |
+| **Gemini CLI Guide** | Gemini CLI 完整使用參考 | |
+| **OpenSpec Guide** | 規範驅動開發工作流程框架 | |
+| **Coding Agent** | 透過背景程序執行程式碼代理（Codex/Claude Code/OpenCode/Pi）| OpenClaw 官方內建技能 |
+| **GitHub** | 使用 `gh` CLI 與 GitHub 互動 | OpenClaw 官方內建技能 |
+| **tmux** | 遠端控制 tmux 會話，處理互動式 CLI 工作流程 | OpenClaw 官方內建技能 |
 
 ---
 

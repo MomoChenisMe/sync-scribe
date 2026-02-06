@@ -4,18 +4,18 @@ A collection of Claude Code skills for productivity, content creation, and devel
 
 ## Skills Overview
 
-| Skill | Description |
-|-------|-------------|
-| **Sync Scribe** | Note-taking and todo management |
-| **MomoChenIsMe Writing Style** | Blog writing style guide (Traditional Chinese) |
-| **Skill Creator** | Guide for creating effective Claude Code skills |
-| **Plugin Creator** | Guide for creating Claude Code plugins |
-| **Claude Code CLI Guide** | Complete CLI usage reference |
-| **Gemini CLI Guide** | Complete Gemini CLI usage reference |
-| **OpenSpec Guide** | Spec-Driven Development workflow framework |
-| **Coding Agent** | Run coding agents (Codex/Claude Code/OpenCode/Pi) via background process |
-| **GitHub** | Interact with GitHub using the `gh` CLI |
-| **tmux** | Remote-control tmux sessions for interactive CLI workflows |
+| Skill | Description | Note |
+|-------|-------------|------|
+| **Sync Scribe** | Note-taking and todo management | |
+| **MomoChenIsMe Writing Style** | Blog writing style guide (Traditional Chinese) | |
+| **Skill Creator** | Guide for creating effective Claude Code skills | |
+| **Plugin Creator** | Guide for creating Claude Code plugins | |
+| **Claude Code CLI Guide** | Complete CLI usage reference | |
+| **Gemini CLI Guide** | Complete Gemini CLI usage reference | |
+| **OpenSpec Guide** | Spec-Driven Development workflow framework | |
+| **Coding Agent** | Run coding agents (Codex/Claude Code/OpenCode/Pi) via background process | OpenClaw built-in skill |
+| **GitHub** | Interact with GitHub using the `gh` CLI | OpenClaw built-in skill |
+| **tmux** | Remote-control tmux sessions for interactive CLI workflows | OpenClaw built-in skill |
 
 ---
 
