@@ -14,6 +14,7 @@ A collection of Claude Code skills for productivity, content creation, and devel
 | **Gemini CLI Guide** | Complete Gemini CLI usage reference |
 | **OpenSpec Guide** | Spec-Driven Development workflow framework |
 | **Coding Agent** | Run coding agents (Codex/Claude Code/OpenCode/Pi) via background process |
+| **GitHub** | Interact with GitHub using the `gh` CLI |
 | **tmux** | Remote-control tmux sessions for interactive CLI workflows |
 
 ---
@@ -329,6 +330,57 @@ Use the process tool to manage background sessions:
 
 ---
 
+## GitHub
+
+Interact with GitHub using the `gh` CLI for issues, pull requests, CI runs, and advanced queries.
+
+### Features
+
+- **Pull request management**: Check CI status, view details, and manage PRs
+- **Workflow monitoring**: List and view GitHub Actions runs
+- **API access**: Use `gh api` for advanced queries not available in other commands
+- **JSON output**: Structured output with `--json` and `--jq` filtering
+
+### Common Commands
+
+| Command | Description |
+|---------|-------------|
+| `gh pr checks <number>` | Check CI status on a PR |
+| `gh run list` | List recent workflow runs |
+| `gh run view <run-id>` | View run details and failed steps |
+| `gh run view <run-id> --log-failed` | View logs for failed steps only |
+| `gh api <endpoint>` | Make advanced API queries |
+
+### Usage Examples
+
+```bash
+# Check PR CI status
+gh pr checks 55 --repo owner/repo
+
+# List recent workflow runs
+gh run list --repo owner/repo --limit 10
+
+# View run and see which steps failed
+gh run view 12345 --repo owner/repo
+
+# View logs for failed steps only
+gh run view 12345 --repo owner/repo --log-failed
+
+# Get PR with specific fields via API
+gh api repos/owner/repo/pulls/55 --jq '.title, .state, .user.login'
+
+# List issues with JSON output
+gh issue list --repo owner/repo --json number,title --jq '.[] | "\(.number): \(.title)"'
+```
+
+### Best Practices
+
+- Always specify `--repo owner/repo` when not in a git directory
+- Use `--json` with `--jq` for structured data processing
+- Use `gh api` for advanced queries not available through other subcommands
+
+---
+
 ## tmux
 
 Remote-control tmux sessions for interactive CLI workflows by sending keystrokes and scraping pane output.
@@ -432,6 +484,8 @@ awesome-momochenisme-skills/
     │   ├── SKILL.md
     │   └── references/
     ├── coding-agent/
+    │   └── SKILL.md
+    ├── github/
     │   └── SKILL.md
     └── tmux/
         ├── SKILL.md

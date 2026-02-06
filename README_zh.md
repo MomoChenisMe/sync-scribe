@@ -14,6 +14,7 @@
 | **Gemini CLI Guide** | Gemini CLI 完整使用參考 |
 | **OpenSpec Guide** | 規範驅動開發工作流程框架 |
 | **Coding Agent** | 透過背景程序執行程式碼代理（Codex/Claude Code/OpenCode/Pi）|
+| **GitHub** | 使用 `gh` CLI 與 GitHub 互動 |
 | **tmux** | 遠端控制 tmux 會話，處理互動式 CLI 工作流程 |
 
 ---
@@ -331,6 +332,57 @@ bash command:"codex exec 'Your prompt'"
 
 ---
 
+## GitHub
+
+使用 `gh` CLI 與 GitHub 互動，管理 issues、pull requests、CI 執行與進階查詢。
+
+### 功能特色
+
+- **Pull request 管理**：檢查 CI 狀態、查看詳情並管理 PR
+- **工作流程監控**：列出與查看 GitHub Actions 執行記錄
+- **API 存取**：使用 `gh api` 進行其他命令無法執行的進階查詢
+- **JSON 輸出**：透過 `--json` 與 `--jq` 過濾取得結構化輸出
+
+### 常用命令
+
+| 命令 | 說明 |
+|------|------|
+| `gh pr checks <編號>` | 檢查 PR 的 CI 狀態 |
+| `gh run list` | 列出最近的工作流程執行記錄 |
+| `gh run view <run-id>` | 查看執行詳情與失敗步驟 |
+| `gh run view <run-id> --log-failed` | 僅查看失敗步驟的日誌 |
+| `gh api <endpoint>` | 執行進階 API 查詢 |
+
+### 使用範例
+
+```bash
+# 檢查 PR 的 CI 狀態
+gh pr checks 55 --repo owner/repo
+
+# 列出最近的工作流程執行記錄
+gh run list --repo owner/repo --limit 10
+
+# 查看執行記錄與失敗的步驟
+gh run view 12345 --repo owner/repo
+
+# 僅查看失敗步驟的日誌
+gh run view 12345 --repo owner/repo --log-failed
+
+# 透過 API 取得 PR 的特定欄位
+gh api repos/owner/repo/pulls/55 --jq '.title, .state, .user.login'
+
+# 使用 JSON 輸出列出 issues
+gh issue list --repo owner/repo --json number,title --jq '.[] | "\(.number): \(.title)"'
+```
+
+### 最佳實踐
+
+- 不在 git 目錄中時，務必指定 `--repo owner/repo`
+- 使用 `--json` 與 `--jq` 進行結構化資料處理
+- 對於其他子命令無法執行的進階查詢，使用 `gh api`
+
+---
+
 ## tmux
 
 透過發送按鍵與擷取窗格輸出，遠端控制 tmux 會話以處理互動式 CLI 工作流程。
@@ -434,6 +486,8 @@ awesome-momochenisme-skills/
     │   ├── SKILL.md
     │   └── references/
     ├── coding-agent/
+    │   └── SKILL.md
+    ├── github/
     │   └── SKILL.md
     └── tmux/
         ├── SKILL.md
