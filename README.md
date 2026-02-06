@@ -13,6 +13,8 @@ A collection of Claude Code skills for productivity, content creation, and devel
 | **Claude Code CLI Guide** | Complete CLI usage reference |
 | **Gemini CLI Guide** | Complete Gemini CLI usage reference |
 | **OpenSpec Guide** | Spec-Driven Development workflow framework |
+| **Coding Agent** | Run coding agents (Codex/Claude Code/OpenCode/Pi) via background process |
+| **tmux** | Remote-control tmux sessions for interactive CLI workflows |
 
 ---
 
@@ -284,6 +286,94 @@ A lightweight Spec-Driven Development (SDD) framework for managing changes syste
 
 ---
 
+## Coding Agent
+
+A skill for running coding agents (Codex CLI, Claude Code, OpenCode, or Pi Coding Agent) via background processes with programmatic control.
+
+### Features
+
+- **PTY mode support**: Proper pseudo-terminal allocation for interactive CLI tools
+- **Background execution**: Run agents in background and monitor via process tool
+- **Multiple agent support**: Works with Codex, Claude Code, OpenCode, and Pi
+- **Process management**: Full control via process tool actions (poll, log, write, kill)
+
+### Key Requirements
+
+Always use `pty:true` when running coding agents - they require pseudo-terminals to work correctly:
+
+```bash
+# ✅ Correct - with PTY
+bash pty:true command:"codex exec 'Your prompt'"
+
+# ❌ Wrong - no PTY, agent may break
+bash command:"codex exec 'Your prompt'"
+```
+
+### Common Parameters
+
+| Parameter | Description |
+|-----------|-------------|
+| `pty` | **Required** - Allocates pseudo-terminal for interactive CLIs |
+| `background` | Run in background, returns sessionId for monitoring |
+| `workdir` | Working directory (agent sees only this folder's context) |
+| `timeout` | Timeout in seconds (kills process on expiry) |
+
+### Process Management
+
+Use the process tool to manage background sessions:
+- `list` - List all running/recent sessions
+- `poll` - Check if session is still running
+- `log` - Get session output
+- `write/submit` - Send input to agent
+- `kill` - Terminate the session
+
+---
+
+## tmux
+
+Remote-control tmux sessions for interactive CLI workflows by sending keystrokes and scraping pane output.
+
+### Features
+
+- **Isolated socket management**: Dedicated socket directory for OpenClaw sessions
+- **Interactive TTY control**: Send keystrokes and capture pane output
+- **Session management**: Create, attach, and monitor tmux sessions programmatically
+- **Pane targeting**: Flexible session:window.pane addressing
+
+### When to Use
+
+Use tmux for interactive TTY applications. For long-running, non-interactive tasks, prefer `exec` background mode.
+
+### Quick Start
+
+```bash
+SOCKET_DIR="${OPENCLAW_TMUX_SOCKET_DIR:-/tmp/openclaw-tmux-sockets}"
+mkdir -p "$SOCKET_DIR"
+SOCKET="$SOCKET_DIR/openclaw.sock"
+SESSION=openclaw-python
+
+# Create new session
+tmux -S "$SOCKET" new -d -s "$SESSION" -n shell
+
+# Send commands
+tmux -S "$SOCKET" send-keys -t "$SESSION":0.0 -- 'python3 -q' Enter
+
+# Capture output
+tmux -S "$SOCKET" capture-pane -p -J -t "$SESSION":0.0 -S -200
+```
+
+### Core Commands
+
+| Command | Purpose |
+|---------|---------|
+| `new -d -s <session>` | Create detached session |
+| `send-keys -t <target> -- <text>` | Send keystrokes to pane |
+| `capture-pane -p -J -t <target>` | Capture and print pane output |
+| `list-sessions` | List all sessions on socket |
+| `attach -t <session>` | Attach to session for monitoring |
+
+---
+
 ## Other Recommended Skills
 
 A curated list of useful Claude Code skills from the community.
@@ -338,9 +428,14 @@ awesome-momochenisme-skills/
     ├── gemini-cli-guide/
     │   ├── SKILL.md
     │   └── references/
-    └── openspec-guide/
+    ├── openspec-guide/
+    │   ├── SKILL.md
+    │   └── references/
+    ├── coding-agent/
+    │   └── SKILL.md
+    └── tmux/
         ├── SKILL.md
-        └── references/
+        └── scripts/
 ```
 
 ## License

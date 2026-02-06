@@ -13,6 +13,8 @@
 | **Claude Code CLI Guide** | Claude Code CLI 完整使用參考 |
 | **Gemini CLI Guide** | Gemini CLI 完整使用參考 |
 | **OpenSpec Guide** | 規範驅動開發工作流程框架 |
+| **Coding Agent** | 透過背景程序執行程式碼代理（Codex/Claude Code/OpenCode/Pi）|
+| **tmux** | 遠端控制 tmux 會話，處理互動式 CLI 工作流程 |
 
 ---
 
@@ -286,6 +288,94 @@ Gemini CLI 命令與設定的完整參考。
 
 ---
 
+## Coding Agent
+
+用於透過背景程序運行程式碼代理（Codex CLI、Claude Code、OpenCode 或 Pi Coding Agent）並進行程式化控制的技能。
+
+### 功能特色
+
+- **PTY 模式支援**：為互動式 CLI 工具提供適當的偽終端配置
+- **背景執行**：在背景運行代理並透過 process 工具監控
+- **多代理支援**：支援 Codex、Claude Code、OpenCode 與 Pi
+- **程序管理**：透過 process 工具完整控制（poll、log、write、kill）
+
+### 關鍵需求
+
+運行程式碼代理時必須使用 `pty:true` - 它們需要偽終端才能正常運作：
+
+```bash
+# ✅ 正確 - 使用 PTY
+bash pty:true command:"codex exec 'Your prompt'"
+
+# ❌ 錯誤 - 無 PTY，代理可能會失效
+bash command:"codex exec 'Your prompt'"
+```
+
+### 常用參數
+
+| 參數 | 說明 |
+|------|------|
+| `pty` | **必要** - 為互動式 CLI 配置偽終端 |
+| `background` | 在背景執行，回傳 sessionId 供監控 |
+| `workdir` | 工作目錄（代理僅看到此資料夾的內容）|
+| `timeout` | 逾時秒數（到期時終止程序）|
+
+### 程序管理
+
+使用 process 工具管理背景會話：
+- `list` - 列出所有運行中/最近的會話
+- `poll` - 檢查會話是否仍在運行
+- `log` - 取得會話輸出
+- `write/submit` - 向代理發送輸入
+- `kill` - 終止會話
+
+---
+
+## tmux
+
+透過發送按鍵與擷取窗格輸出，遠端控制 tmux 會話以處理互動式 CLI 工作流程。
+
+### 功能特色
+
+- **隔離的 socket 管理**：為 OpenClaw 會話提供專用 socket 目錄
+- **互動式 TTY 控制**：發送按鍵並擷取窗格輸出
+- **會話管理**：程式化地建立、連接與監控 tmux 會話
+- **窗格定位**：彈性的 session:window.pane 定址方式
+
+### 何時使用
+
+用於互動式 TTY 應用程式。對於長時間執行的非互動式任務，建議使用 `exec` 背景模式。
+
+### 快速開始
+
+```bash
+SOCKET_DIR="${OPENCLAW_TMUX_SOCKET_DIR:-/tmp/openclaw-tmux-sockets}"
+mkdir -p "$SOCKET_DIR"
+SOCKET="$SOCKET_DIR/openclaw.sock"
+SESSION=openclaw-python
+
+# 建立新會話
+tmux -S "$SOCKET" new -d -s "$SESSION" -n shell
+
+# 發送命令
+tmux -S "$SOCKET" send-keys -t "$SESSION":0.0 -- 'python3 -q' Enter
+
+# 擷取輸出
+tmux -S "$SOCKET" capture-pane -p -J -t "$SESSION":0.0 -S -200
+```
+
+### 核心命令
+
+| 命令 | 用途 |
+|------|------|
+| `new -d -s <session>` | 建立分離會話 |
+| `send-keys -t <target> -- <text>` | 向窗格發送按鍵 |
+| `capture-pane -p -J -t <target>` | 擷取並列印窗格輸出 |
+| `list-sessions` | 列出 socket 上的所有會話 |
+| `attach -t <session>` | 連接至會話進行監控 |
+
+---
+
 ## 其他推薦技能
 
 精選社群中好用的 Claude Code 技能。
@@ -340,9 +430,14 @@ awesome-momochenisme-skills/
     ├── gemini-cli-guide/
     │   ├── SKILL.md
     │   └── references/
-    └── openspec-guide/
+    ├── openspec-guide/
+    │   ├── SKILL.md
+    │   └── references/
+    ├── coding-agent/
+    │   └── SKILL.md
+    └── tmux/
         ├── SKILL.md
-        └── references/
+        └── scripts/
 ```
 
 ## 授權
