@@ -33,8 +33,43 @@ Anthropic 官方技能。
 
 ---
 
-## 來自 [MomoChenisMe](https://github.com/MomoChenisMe)
+## 來自 [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill)
+
+AI 驅動的專業 UI/UX 設計智慧工具。
 
 | 技能 | 說明 |
 |------|------|
-| [sync-scribe](https://github.com/MomoChenisMe/sync-scribe) | 獨立版筆記與待辦事項管理插件 |
+| [ui-ux-pro-max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | UI/UX 設計系統生成，支援 67 種風格、96 種調色盤及產業專屬規則 |
+
+---
+
+## 來自 [openclaw/skills](https://github.com/openclaw/skills)
+
+社群驅動的技能集散地，匯集多位開發者的貢獻。
+
+| 技能 | 說明 |
+|------|------|
+| [coding-agent](https://github.com/openclaw/skills/blob/main/skills/steipete/coding-agent/SKILL.md) | 背景優先的編碼代理工作流程，支援平行 PR 審查與批次處理 |
+
+---
+
+## 來自 [obra/superpowers](https://github.com/obra/superpowers)
+
+代理式技能框架，提供結構化的軟體開發工作流程。
+
+| 技能 | 說明 |
+|------|------|
+| [brainstorming](https://github.com/obra/superpowers/tree/main/skills/brainstorming) | 結構化腦力激盪與構思 |
+| [writing-plans](https://github.com/obra/superpowers/tree/main/skills/writing-plans) | 開發計畫撰寫 |
+| [executing-plans](https://github.com/obra/superpowers/tree/main/skills/executing-plans) | 計畫執行指引 |
+| [test-driven-development](https://github.com/obra/superpowers/tree/main/skills/test-driven-development) | 測試驅動開發（RED-GREEN-REFACTOR 循環） |
+| [systematic-debugging](https://github.com/obra/superpowers/tree/main/skills/systematic-debugging) | 系統化除錯方法論 |
+| [subagent-driven-development](https://github.com/obra/superpowers/tree/main/skills/subagent-driven-development) | 子代理驅動的自主開發模式 |
+| [dispatching-parallel-agents](https://github.com/obra/superpowers/tree/main/skills/dispatching-parallel-agents) | 平行執行多個代理 |
+| [using-git-worktrees](https://github.com/obra/superpowers/tree/main/skills/using-git-worktrees) | Git worktrees 工作流程 |
+| [requesting-code-review](https://github.com/obra/superpowers/tree/main/skills/requesting-code-review) | 程式碼審查請求流程 |
+| [receiving-code-review](https://github.com/obra/superpowers/tree/main/skills/receiving-code-review) | 處理程式碼審查回饋 |
+| [finishing-a-development-branch](https://github.com/obra/superpowers/tree/main/skills/finishing-a-development-branch) | 開發分支完成與收尾 |
+| [verification-before-completion](https://github.com/obra/superpowers/tree/main/skills/verification-before-completion) | 完成前的品質驗證 |
+| [writing-skills](https://github.com/obra/superpowers/tree/main/skills/writing-skills) | 自訂技能撰寫指南 |
+| [using-superpowers](https://github.com/obra/superpowers/tree/main/skills/using-superpowers) | superpowers 框架使用指南 |
