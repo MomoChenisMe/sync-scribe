@@ -4,18 +4,16 @@ A collection of Claude Code skills for productivity, content creation, and devel
 
 ## Skills Overview
 
-| Skill | Description | Note |
-|-------|-------------|------|
-| **Sync Scribe** | Note-taking and todo management | |
-| **MomoChenIsMe Writing Style** | Blog writing style guide (Traditional Chinese) | |
-| **Skill Creator** | Guide for creating effective Claude Code skills | |
-| **Plugin Creator** | Guide for creating Claude Code plugins | |
-| **Claude Code CLI Guide** | Complete CLI usage reference | |
-| **Gemini CLI Guide** | Complete Gemini CLI usage reference | |
-| **OpenSpec Guide** | Spec-Driven Development workflow framework | |
-| **Coding Agent** | Run coding agents (Codex/Claude Code/OpenCode/Pi) via background process | OpenClaw built-in skill |
-| **GitHub** | Interact with GitHub using the `gh` CLI | OpenClaw built-in skill |
-| **tmux** | Remote-control tmux sessions for interactive CLI workflows | OpenClaw built-in skill |
+| Skill | Description |
+|-------|-------------|
+| **Sync Scribe** | Note-taking and todo management |
+| **MomoChenIsMe Writing Style** | Blog writing style guide (Traditional Chinese) |
+| **Conventional Commit** | Git commit messages following Conventional Commits v1.0.0 |
+| **UI/UX Pro Max** | Comprehensive UI/UX design intelligence |
+| **Skill Creator** | Guide for creating effective Claude Code skills |
+| **Plugin Creator** | Guide for creating Claude Code plugins |
+| **Claude Code CLI Guide** | Complete CLI usage reference |
+| **Gemini CLI Guide** | Complete Gemini CLI usage reference |
 
 ---
 
@@ -92,6 +90,74 @@ Trigger naturally by asking Claude:
 | **Bold** | Emphasis on keywords |
 | `Code` | Technical terms and commands |
 | > Quote | Important callouts |
+
+---
+
+## Conventional Commit
+
+Write git commit messages following the [Conventional Commits v1.0.0](https://www.conventionalcommits.org/en/v1.0.0/) specification.
+
+### Features
+
+- **Complete specification**: All 16 rules with RFC 2119 keywords
+- **Type system**: 10 standard types (feat, fix, build, chore, ci, docs, style, refactor, perf, test) with SemVer mapping
+- **BREAKING CHANGE**: Dual mechanism support (`!` suffix and footer)
+- **Footer format**: Git trailer convention with common tokens
+- **Writing guidelines**: Imperative mood, 72-char limit, "why not what" principle
+- **Rich examples**: 13+ examples covering all types and scenarios
+
+### Commit Format
+
+```
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+### Standard Types
+
+| Type | Purpose | SemVer |
+| --- | --- | --- |
+| `feat` | New feature | MINOR |
+| `fix` | Bug fix | PATCH |
+| `build` | Build system / external deps | — |
+| `chore` | Maintenance tasks | — |
+| `ci` | CI configuration | — |
+| `docs` | Documentation only | — |
+| `style` | Code formatting (NOT CSS) | — |
+| `refactor` | Code restructuring | — |
+| `perf` | Performance improvement | — |
+| `test` | Tests | — |
+
+### References
+
+- [specification.md](skills/conventional-commit/references/specification.md) - Full v1.0.0 specification, BNF grammar, SemVer correlation, and FAQ
+
+---
+
+## UI/UX Pro Max
+
+> Source: [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill)
+
+AI-powered comprehensive UI/UX design intelligence for building professional interfaces.
+
+### Features
+
+- **67 design styles**: From minimalist to brutalist, covering all major design aesthetics
+- **96 color palettes**: Industry-specific and mood-based color systems
+- **Industry-specific rules**: Tailored design patterns for different sectors
+- **Accessibility compliance**: WCAG guidelines integration
+- **Responsive design**: Mobile-first and adaptive layout patterns
+
+### Usage
+
+Trigger naturally by asking Claude:
+
+- "Design a dashboard for a SaaS product"
+- "Create a landing page with a modern minimalist style"
+- "Build a mobile app UI for a fitness tracker"
 
 ---
 
@@ -247,190 +313,11 @@ Complete reference for Gemini CLI commands and configuration.
 
 ---
 
-## OpenSpec Guide
-
-A lightweight Spec-Driven Development (SDD) framework for managing changes systematically.
-
-### Core Philosophy
-
-- **Fluid** not rigid
-- **Iterative** not waterfall
-- **Simple** not complex
-
-### Document Structure
-
-```
-.openspec/changes/<change-id>/
-├── proposal.md      # Why & What
-├── specs/           # Requirements (delta specs)
-├── design.md        # How
-└── tasks.md         # Implementation checklist
-```
-
-### Commands
-
-| Command | Purpose |
-|---------|---------|
-| `/opsx:new` | Create new change |
-| `/opsx:ff` | Fast-forward: generate all docs |
-| `/opsx:continue` | Resume in-progress change |
-| `/opsx:apply` | Execute implementation |
-| `/opsx:verify` | Verify against specs |
-| `/opsx:archive` | Archive completed change |
-| `/opsx:explore` | Explore mode (no changes) |
-
-### Standard Workflow
-
-```
-/opsx:new → /opsx:ff → /opsx:apply → /opsx:verify → /opsx:archive
-```
-
----
-
-## Coding Agent
-
-A skill for running coding agents (Codex CLI, Claude Code, OpenCode, or Pi Coding Agent) via background processes with programmatic control.
-
-### Features
-
-- **PTY mode support**: Proper pseudo-terminal allocation for interactive CLI tools
-- **Background execution**: Run agents in background and monitor via process tool
-- **Multiple agent support**: Works with Codex, Claude Code, OpenCode, and Pi
-- **Process management**: Full control via process tool actions (poll, log, write, kill)
-
-### Key Requirements
-
-Always use `pty:true` when running coding agents - they require pseudo-terminals to work correctly:
-
-```bash
-# ✅ Correct - with PTY
-bash pty:true command:"codex exec 'Your prompt'"
-
-# ❌ Wrong - no PTY, agent may break
-bash command:"codex exec 'Your prompt'"
-```
-
-### Common Parameters
-
-| Parameter | Description |
-|-----------|-------------|
-| `pty` | **Required** - Allocates pseudo-terminal for interactive CLIs |
-| `background` | Run in background, returns sessionId for monitoring |
-| `workdir` | Working directory (agent sees only this folder's context) |
-| `timeout` | Timeout in seconds (kills process on expiry) |
-
-### Process Management
-
-Use the process tool to manage background sessions:
-- `list` - List all running/recent sessions
-- `poll` - Check if session is still running
-- `log` - Get session output
-- `write/submit` - Send input to agent
-- `kill` - Terminate the session
-
----
-
-## GitHub
-
-Interact with GitHub using the `gh` CLI for issues, pull requests, CI runs, and advanced queries.
-
-### Features
-
-- **Pull request management**: Check CI status, view details, and manage PRs
-- **Workflow monitoring**: List and view GitHub Actions runs
-- **API access**: Use `gh api` for advanced queries not available in other commands
-- **JSON output**: Structured output with `--json` and `--jq` filtering
-
-### Common Commands
-
-| Command | Description |
-|---------|-------------|
-| `gh pr checks <number>` | Check CI status on a PR |
-| `gh run list` | List recent workflow runs |
-| `gh run view <run-id>` | View run details and failed steps |
-| `gh run view <run-id> --log-failed` | View logs for failed steps only |
-| `gh api <endpoint>` | Make advanced API queries |
-
-### Usage Examples
-
-```bash
-# Check PR CI status
-gh pr checks 55 --repo owner/repo
-
-# List recent workflow runs
-gh run list --repo owner/repo --limit 10
-
-# View run and see which steps failed
-gh run view 12345 --repo owner/repo
-
-# View logs for failed steps only
-gh run view 12345 --repo owner/repo --log-failed
-
-# Get PR with specific fields via API
-gh api repos/owner/repo/pulls/55 --jq '.title, .state, .user.login'
-
-# List issues with JSON output
-gh issue list --repo owner/repo --json number,title --jq '.[] | "\(.number): \(.title)"'
-```
-
-### Best Practices
-
-- Always specify `--repo owner/repo` when not in a git directory
-- Use `--json` with `--jq` for structured data processing
-- Use `gh api` for advanced queries not available through other subcommands
-
----
-
-## tmux
-
-Remote-control tmux sessions for interactive CLI workflows by sending keystrokes and scraping pane output.
-
-### Features
-
-- **Isolated socket management**: Dedicated socket directory for OpenClaw sessions
-- **Interactive TTY control**: Send keystrokes and capture pane output
-- **Session management**: Create, attach, and monitor tmux sessions programmatically
-- **Pane targeting**: Flexible session:window.pane addressing
-
-### When to Use
-
-Use tmux for interactive TTY applications. For long-running, non-interactive tasks, prefer `exec` background mode.
-
-### Quick Start
-
-```bash
-SOCKET_DIR="${OPENCLAW_TMUX_SOCKET_DIR:-/tmp/openclaw-tmux-sockets}"
-mkdir -p "$SOCKET_DIR"
-SOCKET="$SOCKET_DIR/openclaw.sock"
-SESSION=openclaw-python
-
-# Create new session
-tmux -S "$SOCKET" new -d -s "$SESSION" -n shell
-
-# Send commands
-tmux -S "$SOCKET" send-keys -t "$SESSION":0.0 -- 'python3 -q' Enter
-
-# Capture output
-tmux -S "$SOCKET" capture-pane -p -J -t "$SESSION":0.0 -S -200
-```
-
-### Core Commands
-
-| Command | Purpose |
-|---------|---------|
-| `new -d -s <session>` | Create detached session |
-| `send-keys -t <target> -- <text>` | Send keystrokes to pane |
-| `capture-pane -p -J -t <target>` | Capture and print pane output |
-| `list-sessions` | List all sessions on socket |
-| `attach -t <session>` | Attach to session for monitoring |
-
----
-
 ## Other Recommended Skills
 
 A curated list of useful Claude Code skills from the community.
 
-👉 [View Full List](skills/RECOMMENDED_SKILLS.md)
+- [View Full List](skills/RECOMMENDED_SKILLS.md)
 
 ---
 
@@ -447,6 +334,7 @@ claude --plugin-dir ./
 awesome-momochenisme-skills/
 ├── README.md
 ├── README_zh.md
+├── .gitignore
 ├── .claude-plugin/
 │   └── plugin.json
 ├── commands/
@@ -465,7 +353,13 @@ awesome-momochenisme-skills/
     ├── momochenisme-writing-style/
     │   ├── SKILL.md
     │   └── references/
-    │       └── style-examples.md
+    ├── conventional-commit/
+    │   ├── SKILL.md
+    │   └── references/
+    ├── ui-ux-pro-max/
+    │   ├── SKILL.md
+    │   ├── scripts/
+    │   └── data/
     ├── skill-creator/
     │   ├── SKILL.md
     │   ├── scripts/
@@ -477,19 +371,9 @@ awesome-momochenisme-skills/
     ├── claude-code-cli-guide/
     │   ├── SKILL.md
     │   └── references/
-    ├── gemini-cli-guide/
-    │   ├── SKILL.md
-    │   └── references/
-    ├── openspec-guide/
-    │   ├── SKILL.md
-    │   └── references/
-    ├── coding-agent/
-    │   └── SKILL.md
-    ├── github/
-    │   └── SKILL.md
-    └── tmux/
+    └── gemini-cli-guide/
         ├── SKILL.md
-        └── scripts/
+        └── references/
 ```
 
 ## License
